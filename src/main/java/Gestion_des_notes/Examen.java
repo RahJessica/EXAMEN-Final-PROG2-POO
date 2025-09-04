@@ -1,6 +1,8 @@
 package Gestion_des_notes;
 
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.List;
 
 public class Examen {
     private Integer id;
@@ -8,13 +10,15 @@ public class Examen {
     private Cours cours;
     private Instant dateEtHeure;
     private Integer coefficient;
+    private List<Notes> notes;
 
-    public Examen(Integer id, String titre, Cours cours, Instant dateEtHeure, Integer coefficient) {
+    public Examen(Integer id, String titre, Cours cours, Instant dateEtHeure, Integer coefficient, List<Notes> notes) {
         this.id = id;
         this.titre = titre;
         this.cours = cours;
         this.dateEtHeure = dateEtHeure;
         this.coefficient = coefficient;
+        this.notes = notes;
     }
 
     public Integer getId() {
@@ -55,5 +59,26 @@ public class Examen {
 
     public void setCoefficient(Integer coefficient) {
         this.coefficient = coefficient;
+    }
+
+    public List<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Notes> notes) {
+        this.notes = notes;
+    }
+
+    public Double getExamGrade(Examen examen, Etudiants etudiants, Instant t) {
+        return etudiants.getHistoriqueNotes()
+                .stream()
+                .filter(note -> note.getDateDebut() == t)
+                .max(Comparator.comparing(Notes::getDateDebut))
+                .map(Notes::getNoteInitiale)
+                .get();
+    }
+
+    public static void main(String[] args) {
+
     }
 }

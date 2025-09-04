@@ -89,6 +89,14 @@ public class Etudiants {
         this.tuteur = tuteur;
     }
 
+    public List<Notes> getHistoriqueNotes() {
+        return historiqueNotes;
+    }
+
+    public void setHistoriqueNotes(List<Notes> historiqueNotes) {
+        this.historiqueNotes = historiqueNotes;
+    }
+
     @Override
     public String toString() {
         return "Etudiants{" +
