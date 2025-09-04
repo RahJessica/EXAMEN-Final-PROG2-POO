@@ -3,6 +3,7 @@ package Gestion_des_notes;
 import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Examen {
     private Integer id;
@@ -62,11 +63,21 @@ public class Examen {
     public Double getExamGrade(Examen examen, Etudiants etudiants, Instant t) {
         return etudiants.getHistoriqueNotes()
                 .stream()
-                .filter(note -> note.getDateDebut() == t)
                 .filter(note -> note.getExamen().equals(examen))
+                .filter(note -> note.getDateDebut() == t)
                 .max(Comparator.comparing(Notes::getDateDebut))
                 .map(Notes::getNoteInitiale)
                 .get();
+    }
+
+    public void getCourseGrade(Cours cours, Etudiants etudiants, Instant t) {
+        var historiqueNotes = etudiants.getHistoriqueNotes();
+        for (var note : historiqueNotes) {
+            if (note.getCours().equals(cours) && note.getDateDebut() == t) {
+                var noteFinale = (note.getNoteInitiale()*coefficient)/10;
+                System.out.println(noteFinale);
+            }
+        }
     }
 
     public static void main(String[] args) {
