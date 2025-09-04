@@ -24,7 +24,7 @@ public class TestExamGrade {
     }
 
     @Test
-    void testGetExamGrade(){
+    void testGetCourseGrade(){
         assertEquals();
     }
 }

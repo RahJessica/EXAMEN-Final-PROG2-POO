@@ -74,7 +74,7 @@ public class Examen {
         var historiqueNotes = etudiants.getHistoriqueNotes();
         for (var note : historiqueNotes) {
             if (note.getCours().equals(cours) && note.getDateDebut() == t) {
-                var noteFinale = (note.getNoteInitiale()*coefficient)/10;
+                var noteFinale = (note.getNoteInitiale()*coefficient)/5;
                 System.out.println(noteFinale);
             }
         }
